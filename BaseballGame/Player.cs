@@ -4,11 +4,14 @@ using System.Text;
 
 namespace BaseballLeague
 {
+
+	public enum POSITION { DESGNATED_HITTER, PITCHER, RIGHT_FIELDER, CATCHER }
+
 	public class Player : IPeople
 	{
 		private string _firstname;
 		private string _lastname;
-
+		private POSITION _position;
 
 		public string FirstName
 		{
@@ -22,6 +25,12 @@ namespace BaseballLeague
 			get { return _lastname; }
 		}
 
+		public POSITION Position
+		{
+			set { _position = value; }
+			get { return _position; }
+		}
+
 		public string FullName
 		{
 			get { return _firstname + " " + _lastname; }
@@ -31,13 +40,22 @@ namespace BaseballLeague
 
 		public Player(string lastName) : this(lastName, "NO FIRST NAME") { }
 		
+		public Player(string lastName, string firstName) : this(lastName, firstName, POSITION.PITCHER) { }
+
+
 		// Designated Constructor
-		public Player(string lastName, string firstName)
+		public Player(string lastName, string firstName, POSITION position)
 		{
-			_firstname = firstName;
-			_lastname = lastName;
+			FirstName = firstName;
+			LastName = lastName;
+			Position = position;
 		}
 
+
+		public string ToString()
+        {
+			return FirstName + " " + LastName + " " + Position;
+        }
 	}	
 		
 }

@@ -10,31 +10,31 @@ namespace BaseballLeague
 		private string _lastname;
 
 		public string FirstName
-        {
-            set { _firstname = value; }
-            get { return _firstname; }
-        }
+		{
+			set { _firstname = value; }
+			get { return _firstname; }
+		}
 
 		public string LastName
-        {
-            set { _lastname = value; }
-            get { return _lastname; }
-        }
+		{
+			set { _lastname = value; }
+			get { return _lastname; }
+		}
 
-        public string FullName
-        {
-            get { return _firstname + " " + _lastname; }
-        }
+		public string FullName
+		{
+			get { return _firstname + " " + _lastname; }
+		}
 
-        public Coach() : this("NO LAST NAME") { }
+		public Coach() : this("NO LAST NAME") { }
 
-        public Coach(string lastName) : this(lastName, "NO FIRST NAME") { }
+		public Coach(string lastName) : this(lastName, "NO FIRST NAME") { }
 
-        // Designated Contructor
-        public Coach(string lastName, string firstName)
-        {
-            _firstname = firstName;
-            _lastname = lastName;
-        }
+		// Designated Contructor
+		public Coach(string lastName, string firstName)
+		{
+			_firstname = firstName;
+			_lastname = lastName;
+		}
 	}
 }
