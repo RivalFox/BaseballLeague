@@ -5,7 +5,7 @@ using System.Text;
 namespace BaseballLeague
 {
 
-	public enum POSITION { DESGNATED_HITTER, PITCHER, RIGHT_FIELDER, CATCHER }
+	public enum POSITION { DESIGNATED_HITTER, PITCHER, CATCHER, RIGHT_FIELDER, LEFT_FIELDER, SHORT_STOP, FIRST_BASE, SECOND_BASE, THIRD_BASE }
 
 	public class Player : IPeople
 	{
@@ -25,22 +25,22 @@ namespace BaseballLeague
 			get { return _lastname; }
 		}
 
+		public string FullName
+		{
+			get { return _firstname + " " + _lastname; }
+		}
+
 		public POSITION Position
 		{
 			set { _position = value; }
 			get { return _position; }
 		}
 
-		public string FullName
-		{
-			get { return _firstname + " " + _lastname; }
-		}
-
 		public Player() : this("NO LAST NAME") { }
 
 		public Player(string lastName) : this(lastName, "NO FIRST NAME") { }
 		
-		public Player(string lastName, string firstName) : this(lastName, firstName, POSITION.PITCHER) { }
+		public Player(string lastName, string firstName) : this(lastName, firstName, POSITION.FIRST_BASE) { }
 
 
 		// Designated Constructor
@@ -53,9 +53,9 @@ namespace BaseballLeague
 
 
 		public string ToString()
-        {
+		{
 			return FirstName + " " + LastName + " " + Position;
-        }
+		}
 	}	
 		
 }
