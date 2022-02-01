@@ -15,28 +15,28 @@ namespace BaseballLeague
 
 		// Designated Constructor
 		public Team(string name)
-        {
+		{
 			Name = name;
 			_coaches = new List<Coach>();
 			_players = new List<Player>();	
-        }
+		}
 
 		public bool Add(Coach coach)
-        {
+		{
 			bool success = false;
 			_coaches.Add(coach);
 			success = true;
 
 			return success;
-        }
+		}
 
 		public bool Add(Player player)
-        {
+		{
 			bool success = false;
 			_players.Add(player);
 			success = true;
 
 			return success;
-        }
+		}
 	}
 }
