@@ -32,6 +32,25 @@ namespace BaseballLeague
 			return success;
 		}
 
+		public string ListOfAllPlayers
+		{
+			get
+			{
+				string list = "";
+				foreach(Player player in _players)
+				{
+					list += player + "\n";
+				}
+				return list;
+			}
+		}
+
+		public void DisplayListOfAllPlayers()
+        {
+			Console.WriteLine("The List of all Players is \n");
+			Console.WriteLine(ListOfAllPlayers);
+        }
+
 		public bool CreateCoach(string lastName, string firstName)
 		{
 			bool success = false;
@@ -51,5 +70,7 @@ namespace BaseballLeague
 
 			return success;
 		}
+
+
 	}
 }
