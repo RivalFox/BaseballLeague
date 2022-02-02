@@ -46,10 +46,10 @@ namespace BaseballLeague
 		}
 
 		public void DisplayListOfAllPlayers()
-        {
+		{
 			Console.WriteLine("The List of all Players is \n");
 			Console.WriteLine(ListOfAllPlayers);
-        }
+		}
 
 		public bool CreateCoach(string lastName, string firstName)
 		{
