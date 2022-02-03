@@ -23,10 +23,10 @@ namespace BaseballLeague
 					case "1":
 						Console.WriteLine("We now deal with Players.");
 						bool inputPlayers = false;
-                        while (!inputPlayers)
-                        {
+						while (!inputPlayers)
+						{
 							Console.WriteLine();
-                        }
+						}
 						break;
 					case "2":
 						Console.WriteLine("We now deal with Coaches.");
