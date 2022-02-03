@@ -12,6 +12,7 @@ namespace BaseballLeague
 		private string _lastname;
 		private TITLE _title;
 
+		//
 		public string FirstName
 		{
 			set { _firstname = value; }
@@ -35,6 +36,7 @@ namespace BaseballLeague
 			get { return _title; }
 		}
 
+		//
 		public Coach() : this("NO LAST NAME") { }
 		public Coach(string lastName) : this(lastName, "NO FIRST NAME") { }
 		public Coach(string lastName, string firstName) : this(lastName, firstName, TITLE.ASSISTANT) { }

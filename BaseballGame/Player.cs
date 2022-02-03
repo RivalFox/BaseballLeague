@@ -13,6 +13,7 @@ namespace BaseballLeague
 		private string _lastname;
 		private POSITION _position;
 
+
 		public string FirstName
 		{
 			set { _firstname = value; }
@@ -36,10 +37,9 @@ namespace BaseballLeague
 			get { return _position; }
 		}
 
-		public Player() : this("NO LAST NAME") { }
 
+		public Player() : this("NO LAST NAME") { }
 		public Player(string lastName) : this(lastName, "NO FIRST NAME") { }
-		
 		public Player(string lastName, string firstName) : this(lastName, firstName, POSITION.FIRST_BASE) { }
 
 
@@ -51,7 +51,7 @@ namespace BaseballLeague
 			Position = position;
 		}
 
-
+		override
 		public string ToString()
 		{
 			return FirstName + " " + LastName + " " + Position;

@@ -8,7 +8,7 @@ namespace BaseballLeague
 		{
 			League league = new League("OOD League");
 			bool finished = false;
-
+			Console.WriteLine("Welcome to our League Management System.\n");
 			while (!finished)
 			{
 				Console.WriteLine("Enter your choice:");
@@ -17,7 +17,6 @@ namespace BaseballLeague
 				Console.WriteLine("3. Teams");
 				Console.WriteLine("9. Exit");
 				string inputLine = Console.ReadLine();
-
 				switch (inputLine)
 				{
 					case "1":
@@ -25,8 +24,46 @@ namespace BaseballLeague
 						bool inputPlayers = false;
 						while (!inputPlayers)
 						{
-							Console.WriteLine();
+							Console.WriteLine("\nEnter your choice:");
+							Console.WriteLine("1. Create Player");
+							Console.WriteLine("2. List All players");
+							Console.WriteLine("3. Change Position to Players");
+							Console.WriteLine("9. Exit");
+							string inputLinePlayers = Console.ReadLine();
+                            switch (inputLinePlayers)
+                            {
+								case "1":
+									Console.WriteLine("\nLet's create a player\n");
+									Console.WriteLine("Please, enter the first name:\n");
+									string inputFirstName = Console.ReadLine();
+									Console.WriteLine("Please, enter the last name:\n");
+									string inputLastName = Console.ReadLine();
+									bool playerCreated = league.CreatePlayer(inputLastName, inputFirstName);
+                                    if (playerCreated)
+                                    {
+										Console.WriteLine("The player " + inputFirstName + " " + inputLastName + " was successfully created.");
+                                    }
+                                    else
+                                    {
+										Console.WriteLine("There was an error creating the new player.");
+                                    }
+									break;
+								case "2":
+									Console.WriteLine("Let's list all players");
+									league.DisplayListOfAllPlayers();
+									break;
+								case "3":
+									Console.WriteLine("Let's change a position to a player.");
+									break;
+								case "9":
+									inputPlayers = true;
+									break;
+								default:
+									Console.WriteLine("\nI do not understand that choice.\n");
+									break;
+                            }
 						}
+						Console.WriteLine("\nReturning to the Main Menu\n");
 						break;
 					case "2":
 						Console.WriteLine("We now deal with Coaches.");
