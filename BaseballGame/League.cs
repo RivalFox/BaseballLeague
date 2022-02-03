@@ -52,30 +52,30 @@ namespace BaseballLeague
 		}
 
 		public bool ChangePositionToPlayer(string firstName, string lastName, string position)
-        {
+		{
 			bool success = false;
 			Player foundPlayer = null;
 			foreach(Player player in _players)
-            {
+			{
 				if(player.FirstName.Equals(firstName) && player.LastName.Equals(lastName))
-                {
+				{
 					foundPlayer = player;
-                }
-            }
-            if (foundPlayer != null)
-            {
+				}
+			}
+			if (foundPlayer != null)
+			{
 				string UpperCasePosition = position.ToUpper();
 				// Enum.TryParse()
 				POSITION desiredPosition;
 				if(Enum.TryParse(UpperCasePosition, out desiredPosition))
-                {
+				{
 					foundPlayer.Position = desiredPosition;
 					success = true;
-                }
-            }
+				}
+			}
 
 			return success;
-        }
+		}
 
 		public bool CreateCoach(string lastName, string firstName)
 		{

@@ -30,8 +30,8 @@ namespace BaseballLeague
 							Console.WriteLine("3. Change Position to Players");
 							Console.WriteLine("9. Exit");
 							string inputLinePlayers = Console.ReadLine();
-                            switch (inputLinePlayers)
-                            {
+							switch (inputLinePlayers)
+							{
 								case "1":
 									Console.WriteLine("\nLet's create a player\n");
 									Console.WriteLine("Please, enter the first name:\n");
@@ -39,21 +39,36 @@ namespace BaseballLeague
 									Console.WriteLine("Please, enter the last name:\n");
 									string inputLastName = Console.ReadLine();
 									bool playerCreated = league.CreatePlayer(inputLastName, inputFirstName);
-                                    if (playerCreated)
-                                    {
+									if (playerCreated)
+									{
 										Console.WriteLine("The player " + inputFirstName + " " + inputLastName + " was successfully created.");
-                                    }
-                                    else
-                                    {
+									}
+									else
+									{
 										Console.WriteLine("There was an error creating the new player.");
-                                    }
+									}
 									break;
 								case "2":
 									Console.WriteLine("Let's list all players");
 									league.DisplayListOfAllPlayers();
 									break;
 								case "3":
-									Console.WriteLine("Let's change a position to a player.");
+									Console.WriteLine("\nLet's change a position to a player.\n");
+									Console.WriteLine("Enter player first name:\n");
+									string playerFirstName = Console.ReadLine();
+									Console.WriteLine("Enter player last name:\n");
+									string playerLastName = Console.ReadLine();
+									Console.WriteLine("Please, enter position (DESIGNATED_HITTER, PITCHER, CATCHER, RIGHT_FIELDER, LEFT_FIELDER, SHORT_STOP, FIRST_BASE, SECOND_BASE, THIRD_BASE):\n");
+									string inputPosition = Console.ReadLine();
+									bool changePosition = league.ChangePositionToPlayer(playerFirstName, playerLastName, inputPosition);
+									if (changePosition)
+									{
+										Console.WriteLine("The player " + playerFirstName + " " + playerLastName + " is at position " + inputPosition);
+									}
+                                    else
+                                    {
+										Console.WriteLine("There was an error adding the position.");
+                                    }
 									break;
 								case "9":
 									inputPlayers = true;
@@ -61,7 +76,7 @@ namespace BaseballLeague
 								default:
 									Console.WriteLine("\nI do not understand that choice.\n");
 									break;
-                            }
+							}
 						}
 						Console.WriteLine("\nReturning to the Main Menu\n");
 						break;
