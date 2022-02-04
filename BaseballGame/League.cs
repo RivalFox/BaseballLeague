@@ -87,6 +87,51 @@ namespace BaseballLeague
 			return success;
 		}
 
+		public string ListOfAllCoaches
+        {
+            get
+            {
+				string list = "";
+				foreach(Coach coach in _coaches)
+                {
+					list += coach + "\n";
+                }
+				return list;
+            }
+        }
+
+		public void DisplayListOfAllCoaches()
+        {
+			Console.WriteLine("The List of all Coaches is \n");
+			Console.WriteLine(ListOfAllCoaches);
+        }
+
+		public bool ChangeTitleToCoaches(string firstName, string lastName, string title)
+        {
+			bool success = false;
+			Coach foundCoach = null;
+			foreach(Coach coach in _coaches)
+            {
+				if(coach.FirstName.Equals(firstName) && coach.LastName.Equals(lastName))
+                {
+					foundCoach = coach;
+                }
+            }
+			if(foundCoach != null)
+            {
+				string UpperCasePosition = title.ToUpper();
+				//
+				TITLE desiredTitle;
+				if(Enum.TryParse(UpperCasePosition, out desiredTitle))
+                {
+					foundCoach.Title = desiredTitle;
+					success = true;
+                }
+            }
+
+			return success;
+        }
+
 		public bool CreateTeam(string name)
 		{
 			bool success = false;
