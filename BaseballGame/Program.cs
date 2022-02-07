@@ -124,7 +124,7 @@ namespace BaseballLeague
 									bool changeTitle = league.ChangeTitleToCoaches(coachFirstName, coachLastName, inputTitle);
 									if (changeTitle)
 									{
-										Console.WriteLine("The player " + coachFirstName + " " + coachLastName + " is at position " + inputTitle);
+										Console.WriteLine("The coach's " + coachFirstName + " " + coachLastName + " is at position " + inputTitle);
 									}
 									else
 									{
@@ -139,9 +139,47 @@ namespace BaseballLeague
 									break;
 							}
                         }
+						Console.WriteLine("\nReturning to the Main Menu\n");
 						break;
 					case "3":
 						Console.WriteLine("We now deal with Teams.");
+						bool inputTeams = false;
+                        while (!inputTeams)
+                        {
+							Console.WriteLine("\nEnter your choice:");
+							Console.WriteLine("1. Create Team");
+							Console.WriteLine("2. List All teams");
+							Console.WriteLine("9. Exit");
+							string inputLineTeams = Console.ReadLine();
+							switch (inputLineTeams)
+							{
+								case "1":
+									Console.WriteLine("\nLet's create a Team\n");
+									Console.WriteLine("Please, enter the team name:\n");
+									string inputTeamName = Console.ReadLine();
+									bool teamCreated = league.CreateTeam(inputTeamName);
+									if (teamCreated)
+									{
+										Console.WriteLine("The team's name " + inputTeamName);
+									}
+									else
+									{
+										Console.WriteLine("There was an error creating the new team.");
+									}
+									break;
+								case "2":
+									Console.WriteLine("Let's list all teams");
+									league.DisplayListOfAllTeams();
+									break;
+								case "9":
+									inputTeams = true;
+									break;
+								default:
+									Console.WriteLine("\nI do not understand that choice.\n");
+									break;
+							}
+						}
+						Console.WriteLine("\nReturning to the Main Menu\n");
 						break;
 					case "9":
 						finished = true;
