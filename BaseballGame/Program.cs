@@ -65,10 +65,10 @@ namespace BaseballLeague
 									{
 										Console.WriteLine("The player " + playerFirstName + " " + playerLastName + " is at position " + inputPosition);
 									}
-                                    else
-                                    {
+									else
+									{
 										Console.WriteLine("There was an error adding the position.");
-                                    }
+									}
 									break;
 								case "9":
 									inputPlayers = true;
@@ -83,16 +83,16 @@ namespace BaseballLeague
 					case "2":
 						Console.WriteLine("We now deal with Coaches.");
 						bool inputCoaches = false;
-                        while (!inputCoaches)
-                        {
+						while (!inputCoaches)
+						{
 							Console.WriteLine("\nEnter your choice:");
 							Console.WriteLine("1. Create Coach");
 							Console.WriteLine("2. List All coaches");
 							Console.WriteLine("3. Change Title to Coaches");
 							Console.WriteLine("9. Exit");
 							string inputLineCoaches = Console.ReadLine();
-                            switch (inputLineCoaches)
-                            {
+							switch (inputLineCoaches)
+							{
 								case "1":
 									Console.WriteLine("\nLet's create a coach\n");
 									Console.WriteLine("Please, enter the first name:\n");
@@ -138,14 +138,14 @@ namespace BaseballLeague
 									Console.WriteLine("\nI do not understand that choice.\n");
 									break;
 							}
-                        }
+						}
 						Console.WriteLine("\nReturning to the Main Menu\n");
 						break;
 					case "3":
 						Console.WriteLine("We now deal with Teams.");
 						bool inputTeams = false;
-                        while (!inputTeams)
-                        {
+						while (!inputTeams)
+						{
 							Console.WriteLine("\nEnter your choice:");
 							Console.WriteLine("1. Create Team");
 							Console.WriteLine("2. List All teams");

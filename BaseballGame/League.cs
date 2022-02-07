@@ -88,49 +88,49 @@ namespace BaseballLeague
 		}
 
 		public string ListOfAllCoaches
-        {
-            get
-            {
+		{
+			get
+			{
 				string list = "";
 				foreach(Coach coach in _coaches)
-                {
+				{
 					list += coach + "\n";
-                }
+				}
 				return list;
-            }
-        }
+			}
+		}
 
 		public void DisplayListOfAllCoaches()
-        {
+		{
 			Console.WriteLine("The List of all Coaches is \n");
 			Console.WriteLine(ListOfAllCoaches);
-        }
+		}
 
 		public bool ChangeTitleToCoaches(string firstName, string lastName, string title)
-        {
+		{
 			bool success = false;
 			Coach foundCoach = null;
 			foreach(Coach coach in _coaches)
-            {
+			{
 				if(coach.FirstName.Equals(firstName) && coach.LastName.Equals(lastName))
-                {
+				{
 					foundCoach = coach;
-                }
-            }
+				}
+			}
 			if(foundCoach != null)
-            {
+			{
 				string UpperCasePosition = title.ToUpper();
 				//
 				TITLE desiredTitle;
 				if(Enum.TryParse(UpperCasePosition, out desiredTitle))
-                {
+				{
 					foundCoach.Title = desiredTitle;
 					success = true;
-                }
-            }
+				}
+			}
 
 			return success;
-        }
+		}
 
 		public bool CreateTeam(string name)
 		{
@@ -143,23 +143,23 @@ namespace BaseballLeague
 		}
 
 		public string ListOfAllTeams
-        {
-            get
-            {
+		{
+			get
+			{
 				string list = "";
 				foreach(Team team in _teams)
-                {
+				{
 					list += team + "\n";
-                }
+				}
 				return list;
-            }
-        }
+			}
+		}
 
 		public void DisplayListOfAllTeams()
-        {
+		{
 			Console.WriteLine("The List of all Teams in \n");
 			Console.WriteLine(ListOfAllTeams);
-        }
+		}
 
 
 

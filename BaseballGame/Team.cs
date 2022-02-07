@@ -39,10 +39,10 @@ namespace BaseballLeague
 			return success;
 		}
 
-        override
-        public string ToString()
-        {
-            return "Team name: " + Name;
-        }
-    }
+		override
+		public string ToString()
+		{
+			return "Team name: " + Name;
+		}
+	}
 }
