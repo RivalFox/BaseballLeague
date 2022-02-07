@@ -48,5 +48,11 @@ namespace BaseballLeague
 			_lastname = lastName;
 			Title = title;
 		}
+
+		override
+		public string ToString()
+		{
+			return FirstName + " " + LastName + " " + Title;
+		}
 	}
 }

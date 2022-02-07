@@ -41,7 +41,7 @@ namespace BaseballLeague
 									bool playerCreated = league.CreatePlayer(inputLastName, inputFirstName);
 									if (playerCreated)
 									{
-										Console.WriteLine("The player " + inputFirstName + " " + inputLastName + " was successfully created.");
+										Console.WriteLine("The player's " + inputFirstName + " " + inputLastName + " was successfully created.");
 									}
 									else
 									{
@@ -82,6 +82,63 @@ namespace BaseballLeague
 						break;
 					case "2":
 						Console.WriteLine("We now deal with Coaches.");
+						bool inputCoaches = false;
+                        while (!inputCoaches)
+                        {
+							Console.WriteLine("\nEnter your choice:");
+							Console.WriteLine("1. Create Coach");
+							Console.WriteLine("2. List All coaches");
+							Console.WriteLine("3. Change Title to Coaches");
+							Console.WriteLine("9. Exit");
+							string inputLineCoaches = Console.ReadLine();
+                            switch (inputLineCoaches)
+                            {
+								case "1":
+									Console.WriteLine("\nLet's create a coach\n");
+									Console.WriteLine("Please, enter the first name:\n");
+									string inputFirstName = Console.ReadLine();
+									Console.WriteLine("Please, enter the last name:\n");
+									string inputLastName = Console.ReadLine();
+									bool coachCreated = league.CreateCoach(inputLastName, inputFirstName);
+									if (coachCreated)
+									{
+										Console.WriteLine("The coach's " + inputFirstName + " " + inputLastName + " was successfully created.");
+									}
+									else
+									{
+										Console.WriteLine("There was an error creating the new coach.");
+									}
+									break;
+								case "2":
+									Console.WriteLine("Let's list all coaches");
+									league.DisplayListOfAllCoaches();
+									break;
+								case "3":
+									Console.WriteLine("\nLet's change a title to a coach.\n");
+									Console.WriteLine("Enter coach's first name:\n");
+									string coachFirstName = Console.ReadLine();
+									Console.WriteLine("Enter coach's last name:\n");
+									string coachLastName = Console.ReadLine();
+									Console.WriteLine("Please, enter position (MAIN, ASSISTANT):\n");
+									string inputTitle = Console.ReadLine();
+									bool changeTitle = league.ChangeTitleToCoaches(coachFirstName, coachLastName, inputTitle);
+									if (changeTitle)
+									{
+										Console.WriteLine("The player " + coachFirstName + " " + coachLastName + " is at position " + inputTitle);
+									}
+									else
+									{
+										Console.WriteLine("There was an error adding the title.");
+									}
+									break;
+								case "9":
+									inputCoaches = true;
+									break;
+								default:
+									Console.WriteLine("\nI do not understand that choice.\n");
+									break;
+							}
+                        }
 						break;
 					case "3":
 						Console.WriteLine("We now deal with Teams.");

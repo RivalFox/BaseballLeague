@@ -142,6 +142,26 @@ namespace BaseballLeague
 			return success;
 		}
 
+		public string ListOfAllTeams
+        {
+            get
+            {
+				string list = "";
+				foreach(Team team in _teams)
+                {
+					list += team + "\n";
+                }
+				return list;
+            }
+        }
+
+		public void DisplayListOfAllTeams()
+        {
+			Console.WriteLine("The List of all Teams in \n");
+			Console.WriteLine(ListOfAllTeams);
+        }
+
+
 
 	}
 }
