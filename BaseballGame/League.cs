@@ -162,7 +162,7 @@ namespace BaseballLeague
 		}
 
 		public bool AddCoachToTeam(string firstName, string lastName, string teamName)
-        {
+		{
 			bool success = false;
 			Coach foundCoach = null;
 			foreach (Coach coach in _coaches)
@@ -176,23 +176,73 @@ namespace BaseballLeague
 			{
 				Team foundTeam = null;
 				foreach(Team team in _teams)
-                {
-                    if (team.Name.Equals(teamName))
-                    {
+				{
+					if (team.Name.Equals(teamName))
+					{
 						foundTeam = team;
-                    }
-                }
+					}
+				}
 				if(foundTeam != null)
-                {
+				{
 					foundTeam.Add(foundCoach);
 					success = true;
-                }
+				}
 			}
 
+			return success;
+		}
 
+		public bool AddPlayerToTeam(string firstName, string lastName, string teamName)
+		{
+			bool success = false;
+			Player foundPlayer = null;
+			foreach (Player player in _players)
+			{
+				if (player.FirstName.Equals(firstName) && player.LastName.Equals(lastName))
+				{
+					foundPlayer = player;
+				}
+			}
+			if (foundPlayer != null)
+			{
+				Team foundTeam = null;
+				foreach (Team team in _teams)
+				{
+					if (team.Name.Equals(teamName))
+					{
+						foundTeam = team;
+					}
+				}
+				if (foundTeam != null)
+				{
+					foundTeam.Add(foundPlayer);
+					success = true;
+				}
+			}
 
 			return success;
-        }
+		}
+
+		public void DisplayTeamRoster(string teamName)
+        {
+			Team foundTeam = null;
+			foreach (Team team in _teams)
+			{
+				if (team.Name.Equals(teamName))
+				{
+					foundTeam = team;
+				}
+			}
+			if (foundTeam != null)
+			{
+				Console.WriteLine("The roster of team " + teamName + " is:");
+				Console.WriteLine(foundTeam.TeamRoster);
+			}
+            else
+            {
+				Console.WriteLine("The team " + teamName + " not found");
+            }
+		}
 
 	}
 }

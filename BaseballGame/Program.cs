@@ -183,6 +183,7 @@ namespace BaseballLeague
 									break;
 								case "5":
 									Console.WriteLine("Let's display a team's roster.\n");
+									league.DisplayTeamRoster();
 									break;
 								case "9":
 									inputTeams = true;
