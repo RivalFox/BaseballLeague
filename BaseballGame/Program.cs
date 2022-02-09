@@ -176,6 +176,7 @@ namespace BaseballLeague
 									break;
 								case "3":
 									Console.WriteLine("Let's add a coach to a team.\n");
+
 									break;
 								case "4":
 									Console.WriteLine("Let's add a player to a team.\n");

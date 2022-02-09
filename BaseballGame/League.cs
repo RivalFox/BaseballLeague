@@ -161,7 +161,38 @@ namespace BaseballLeague
 			Console.WriteLine(ListOfAllTeams);
 		}
 
+		public bool AddCoachToTeam(string firstName, string lastName, string teamName)
+        {
+			bool success = false;
+			Coach foundCoach = null;
+			foreach (Coach coach in _coaches)
+			{
+				if (coach.FirstName.Equals(firstName) && coach.LastName.Equals(lastName))
+				{
+					foundCoach = coach;
+				}
+			}
+			if (foundCoach != null)
+			{
+				Team foundTeam = null;
+				foreach(Team team in _teams)
+                {
+                    if (team.Name.Equals(teamName))
+                    {
+						foundTeam = team;
+                    }
+                }
+				if(foundTeam != null)
+                {
+					foundTeam.Add(foundCoach);
+					success = true;
+                }
+			}
 
+
+
+			return success;
+        }
 
 	}
 }
