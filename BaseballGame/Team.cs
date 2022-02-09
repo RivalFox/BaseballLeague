@@ -10,6 +10,46 @@ namespace BaseballLeague
 		public string Name { set { _name = value; } get { return _name; } }
 		private List<Coach> _coaches;
 		private List<Player> _players;
+		public string TeamRoster
+        {
+            get
+            {
+				string roster = "";
+				roster += "<<< " + Name + ">>>";
+				roster += "*** Coaches ***\n";
+				roster += ListOfAllCoaches;
+				roster += "... Players ...\n";
+				roster += ListOfAllPlayers;
+
+				return roster;
+            }
+        }
+
+		public string ListOfAllCoaches
+		{
+			get
+			{
+				string list = "";
+				foreach (Coach coach in _coaches)
+				{
+					list += coach + "\n";
+				}
+				return list;
+			}
+		}
+
+		public string ListOfAllPlayers
+		{
+			get
+			{
+				string list = "";
+				foreach (Player player in _players)
+				{
+					list += player + "\n";
+				}
+				return list;
+			}
+		}
 
 		public Team() : this("No Team Name") { }
 
