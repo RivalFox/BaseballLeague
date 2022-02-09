@@ -149,6 +149,9 @@ namespace BaseballLeague
 							Console.WriteLine("\nEnter your choice:");
 							Console.WriteLine("1. Create Team");
 							Console.WriteLine("2. List All teams");
+							Console.WriteLine("3. Add coach to a team");
+							Console.WriteLine("4. Add player to a team");
+							Console.WriteLine("5. Display a team's roster");
 							Console.WriteLine("9. Exit");
 							string inputLineTeams = Console.ReadLine();
 							switch (inputLineTeams)
@@ -170,6 +173,15 @@ namespace BaseballLeague
 								case "2":
 									Console.WriteLine("Let's list all teams");
 									league.DisplayListOfAllTeams();
+									break;
+								case "3":
+									Console.WriteLine("Let's add a coach to a team.\n");
+									break;
+								case "4":
+									Console.WriteLine("Let's add a player to a team.\n");
+									break;
+								case "5":
+									Console.WriteLine("Let's display a team's roster.\n");
 									break;
 								case "9":
 									inputTeams = true;
