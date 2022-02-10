@@ -225,24 +225,56 @@ namespace BaseballLeague
 
 		public void DisplayTeamRoster(string teamName)
         {
-			Team foundTeam = null;
-			foreach (Team team in _teams)
-			{
-				if (team.Name.Equals(teamName))
-				{
-					foundTeam = team;
-				}
-			}
-			if (foundTeam != null)
-			{
+			Team foundTeam = FindTeam(teamName);
+			if(foundTeam != null)
+            {
 				Console.WriteLine("The roster of team " + teamName + " is:");
 				Console.WriteLine(foundTeam.TeamRoster);
-			}
+            }
             else
             {
-				Console.WriteLine("The team " + teamName + " not found");
+				Console.WriteLine("The team " + teamName + " was not found.");
             }
 		}
+
+		public Coach FindCoach(string firstName, string lastName)
+		{
+			Coach foundCoach = null;
+			foreach (Coach coach in _coaches)
+			{
+				if (coach.FirstName.Equals(firstName) && coach.LastName.Equals(lastName))
+				{
+					foundCoach = coach;
+				}
+			}
+			return foundCoach;
+		}
+
+		public Player FindPlayer(string firstName, string lastName)
+        {
+			Player foundPlayer = null;
+			foreach(Player player in _players)
+            {
+				if(player.FirstName.Equals(firstName) && player.LastName.Equals(lastName))
+                {
+					foundPlayer = player;
+                }
+            }
+			return foundPlayer;
+        }
+
+		public Team FindTeam(string teamName)
+        {
+			Team foundTeam = null;
+			foreach(Team team in _teams)
+            {
+                if (team.Name.Equals(teamName))
+                {
+					foundTeam = team;
+                }
+            }
+			return foundTeam;
+        }
 
 	}
 }

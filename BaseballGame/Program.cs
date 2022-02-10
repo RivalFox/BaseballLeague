@@ -146,6 +146,9 @@ namespace BaseballLeague
 						bool inputTeams = false;
 						while (!inputTeams)
 						{
+							string inputTeamName = "";
+							string inputFirstName = "";
+							string inputLastName = "";
 							Console.WriteLine("\nEnter your choice:");
 							Console.WriteLine("1. Create Team");
 							Console.WriteLine("2. List All teams");
@@ -159,7 +162,6 @@ namespace BaseballLeague
 								case "1":
 									Console.WriteLine("\nLet's create a Team\n");
 									Console.WriteLine("Please, enter the team name:\n");
-									string inputTeamName = Console.ReadLine();
 									bool teamCreated = league.CreateTeam(inputTeamName);
 									if (teamCreated)
 									{
@@ -176,15 +178,43 @@ namespace BaseballLeague
 									break;
 								case "3":
 									Console.WriteLine("Let's add a coach to a team.\n");
-
+									Console.WriteLine("Please, enter the first name:\n");
+									inputFirstName = Console.ReadLine();
+									Console.WriteLine("Please, enter the last name:\n");
+									inputLastName = Console.ReadLine();
+									Console.WriteLine("Enter the team's name\n");
+									inputTeamName = Console.ReadLine();
+									if(league.AddCoachToTeam(inputFirstName, inputLastName, inputTeamName))
+									{
+										Console.WriteLine("Coach successfully added to the team.");
+									}
+									else
+									{
+										Console.WriteLine("There was an error adding the coach.");
+									}
 									break;
 								case "4":
 									Console.WriteLine("Let's add a player to a team.\n");
+									Console.WriteLine("Please, enter the first name:\n");
+									inputFirstName = Console.ReadLine();
+									Console.WriteLine("Please, enter the last name:\n");
+									inputLastName = Console.ReadLine();
+									Console.WriteLine("Enter the team's name\n");
+									inputTeamName = Console.ReadLine();
+									if(league.AddPlayerToTeam(inputFirstName, inputLastName, inputTeamName))
+                                    {
+										Console.WriteLine("Player successfully added to the team.");
+                                    }
+                                    else
+                                    {
+										Console.WriteLine("There was an error adding the player.");
+									}
 									break;
 								case "5":
 									Console.WriteLine("Let's display a team's roster.\n");
-									string TeamName = Console.ReadLine();
-									league.DisplayTeamRoster(TeamName);
+									Console.WriteLine("Enter the team's name\n");
+									inputTeamName = Console.ReadLine();
+									league.DisplayTeamRoster(inputTeamName);
 									break;
 								case "9":
 									inputTeams = true;
