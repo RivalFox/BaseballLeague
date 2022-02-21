@@ -26,6 +26,7 @@ namespace BaseballLeague
 						{
 							string inputFirstName = "";
 							string inputLastName = "";
+							Command command;
 							Console.WriteLine("\nEnter your choice:");
 							Console.WriteLine("1. Create Player");
 							Console.WriteLine("2. List All players");
@@ -40,9 +41,9 @@ namespace BaseballLeague
 									inputFirstName = Console.ReadLine();
 									Console.WriteLine("Please, enter the last name:\n");
 									inputLastName = Console.ReadLine();
-									Command command = new CreatePlayerCommand();
-									command.Param0 = inputFirstName;
-									command.Param1 = inputLastName;
+									command = new CreatePlayerCommand();
+									command.Param0 = inputLastName;
+									command.Param1 = inputFirstName;
 									//bool playerCreated = league.CreatePlayer(inputLastName, inputFirstName);
 									bool playerCreated = command.Execute(league);
 									if (playerCreated)
@@ -56,20 +57,28 @@ namespace BaseballLeague
 									break;
 								case "2":
 									Console.WriteLine("Let's list all players");
-									league.DisplayListOfAllPlayers();
+									command = new DisplayAllPlayersCommand();
+									command.Execute(league);
+									//league.DisplayListOfAllPlayers();
 									break;
 								case "3":
 									Console.WriteLine("\nLet's change a position to a player.\n");
+									Console.WriteLine("\nLet's create a player\n");
 									Console.WriteLine("Enter player first name:\n");
 									inputFirstName = Console.ReadLine();
 									Console.WriteLine("Enter player last name:\n");
 									inputLastName = Console.ReadLine();
 									Console.WriteLine("Please, enter position (DESIGNATED_HITTER, PITCHER, CATCHER, RIGHT_FIELDER, LEFT_FIELDER, SHORT_STOP, FIRST_BASE, SECOND_BASE, THIRD_BASE):\n");
-									string inputPosition = Console.ReadLine();
-									bool changePosition = league.ChangePositionToPlayer(inputFirstName, inputLastName, inputPosition);
-									if (changePosition)
+									string newPosition = Console.ReadLine();
+									command = new ChangePlayerPositionCommand();
+									command.Param0 = inputFirstName;
+									command.Param1 = inputLastName;
+									command.Param2 = newPosition;
+									//bool changePosition = league.ChangePositionToPlayer(inputFirstName, inputLastName, inputPosition);
+									bool positionChanged = command.Execute(league);
+									if (positionChanged)
 									{
-										Console.WriteLine("The player " + inputFirstName + " " + inputLastName + " is at position " + inputPosition);
+										Console.WriteLine("Position successfully changed.");
 									}
 									else
 									{
