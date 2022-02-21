@@ -4,7 +4,7 @@ using System.Text;
 
 namespace BaseballLeague
 {
-    public abstract class Command
+    public abstract class Command : CommandBase
     {
         public string Name { set; get; }
         public string Param0 { set; get; }
@@ -15,7 +15,6 @@ namespace BaseballLeague
         public Command() : this("Nameless")
         {
         }
-
         // Designated Contructor
         public Command(string name)
         {
