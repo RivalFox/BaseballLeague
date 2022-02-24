@@ -4,12 +4,12 @@ using System.Text;
 
 namespace BaseballLeague
 {
-	class League
+	public class League
 	{
 		private string _name;
-		private List<Player> _players;
+		private Dictionary<string, Player>  _players;
 		private Dictionary<string, Coach> _coaches;
-		private List<Team> _teams;
+		private Dictionary<string, Team> _teams;
 		public string Name { set; get;}
 		public League() : this ("NO NAME") { }
 
@@ -17,18 +17,21 @@ namespace BaseballLeague
 		public League(string name)
 		{
 			Name = name;
-			_players = new List<Player>();
+			_players = new Dictionary<string, Player>();
 			_coaches = new Dictionary<string, Coach>();
-			_teams = new List<Team>();
+			_teams = new Dictionary<string, Team>();
 		}
 
 		public bool CreatePlayer(string lastName, string firstName)
 		{
 			bool success = false;
-			Player player = new Player(lastName, firstName);
-			_players.Add(player);
-			success = true;
-
+			if(FindCoach(firstName, lastName) == null)
+            {
+				Player player = new Player(lastName, firstName);
+				_players[player.FullName] = player;
+				success = true;
+			}
+	
 			return success;
 		}
 
@@ -37,7 +40,7 @@ namespace BaseballLeague
 			get
 			{
 				string list = "";
-				foreach(Player player in _players)
+				foreach(Player player in _players.Values)
 				{
 					list += player + "\n";
 				}
@@ -54,14 +57,7 @@ namespace BaseballLeague
 		public bool ChangePositionToPlayer(string firstName, string lastName, string position)
 		{
 			bool success = false;
-			Player foundPlayer = null;
-			foreach(Player player in _players)
-			{
-				if(player.FirstName.Equals(firstName) && player.LastName.Equals(lastName))
-				{
-					foundPlayer = player;
-				}
-			}
+			Player foundPlayer = FindPlayer(firstName, lastName);
 			if (foundPlayer != null)
 			{
 				string UpperCasePosition = position.ToUpper();

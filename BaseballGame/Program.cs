@@ -24,6 +24,9 @@ namespace BaseballLeague
 						bool inputPlayers = false;
 						while (!inputPlayers)
 						{
+							string inputFirstName = "";
+							string inputLastName = "";
+							Command command;
 							Console.WriteLine("\nEnter your choice:");
 							Console.WriteLine("1. Create Player");
 							Console.WriteLine("2. List All players");
@@ -35,10 +38,14 @@ namespace BaseballLeague
 								case "1":
 									Console.WriteLine("\nLet's create a player\n");
 									Console.WriteLine("Please, enter the first name:\n");
-									string inputFirstName = Console.ReadLine();
+									inputFirstName = Console.ReadLine();
 									Console.WriteLine("Please, enter the last name:\n");
-									string inputLastName = Console.ReadLine();
-									bool playerCreated = league.CreatePlayer(inputLastName, inputFirstName);
+									inputLastName = Console.ReadLine();
+									command = new CreatePlayerCommand();
+									command.Param0 = inputLastName;
+									command.Param1 = inputFirstName;
+									//bool playerCreated = league.CreatePlayer(inputLastName, inputFirstName);
+									bool playerCreated = command.Execute(league);
 									if (playerCreated)
 									{
 										Console.WriteLine("The player's " + inputFirstName + " " + inputLastName + " was successfully created.");
@@ -50,7 +57,9 @@ namespace BaseballLeague
 									break;
 								case "2":
 									Console.WriteLine("Let's list all players");
-									league.DisplayListOfAllPlayers();
+									command = new DisplayAllPlayersCommand();
+									command.Execute(league);
+									//league.DisplayListOfAllPlayers();
 									break;
 								case "3":
 									Console.WriteLine("\nLet's change a position to a player.\n");
@@ -59,11 +68,16 @@ namespace BaseballLeague
 									Console.WriteLine("Enter player last name:\n");
 									string playerLastName = Console.ReadLine();
 									Console.WriteLine("Please, enter position (DESIGNATED_HITTER, PITCHER, CATCHER, RIGHT_FIELDER, LEFT_FIELDER, SHORT_STOP, FIRST_BASE, SECOND_BASE, THIRD_BASE):\n");
-									string inputPosition = Console.ReadLine();
-									bool changePosition = league.ChangePositionToPlayer(playerFirstName, playerLastName, inputPosition);
+									string newPosition = Console.ReadLine();
+									command = new ChangePlayerPositionCommand();
+									command.Param0 = inputFirstName;
+									command.Param1 = inputLastName;
+									command.Param2 = newPosition;
+									//bool changePosition = league.ChangePositionToPlayer(playerFirstName, playerLastName, newPosition);
+									bool changePosition = command.Execute(league);
 									if (changePosition)
 									{
-										Console.WriteLine("The player " + playerFirstName + " " + playerLastName + " is at position " + inputPosition);
+										Console.WriteLine("Position successfully changed.");
 									}
 									else
 									{
@@ -85,6 +99,8 @@ namespace BaseballLeague
 						bool inputCoaches = false;
 						while (!inputCoaches)
 						{
+							string inputFirstName = "";
+							string inputLastName = "";
 							Console.WriteLine("\nEnter your choice:");
 							Console.WriteLine("1. Create Coach");
 							Console.WriteLine("2. List All coaches");
@@ -96,9 +112,9 @@ namespace BaseballLeague
 								case "1":
 									Console.WriteLine("\nLet's create a coach\n");
 									Console.WriteLine("Please, enter the first name:\n");
-									string inputFirstName = Console.ReadLine();
+									inputFirstName = Console.ReadLine();
 									Console.WriteLine("Please, enter the last name:\n");
-									string inputLastName = Console.ReadLine();
+									inputLastName = Console.ReadLine();
 									bool coachCreated = league.CreateCoach(inputLastName, inputFirstName);
 									if (coachCreated)
 									{
@@ -165,7 +181,7 @@ namespace BaseballLeague
 									bool teamCreated = league.CreateTeam(inputTeamName);
 									if (teamCreated)
 									{
-										Console.WriteLine("The team's name " + inputTeamName);
+										Console.WriteLine("Team successfully created.");
 									}
 									else
 									{
