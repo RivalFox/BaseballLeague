@@ -8,7 +8,7 @@ namespace BaseballLeague
 	{
 		private string _name;
 		public string Name { set { _name = value; } get { return _name; } }
-		private List<Coach> _coaches;
+		private Dictionary<string, Coach> _coaches;
 		private List<Player> _players;
 		public string TeamRoster
         {
@@ -30,7 +30,7 @@ namespace BaseballLeague
 			get
 			{
 				string list = "";
-				foreach (Coach coach in _coaches)
+				foreach (Coach coach in _coaches.Values)
 				{
 					list += coach + "\n";
 				}
@@ -57,32 +57,60 @@ namespace BaseballLeague
 		public Team(string name)
 		{
 			Name = name;
-			_coaches = new List<Coach>();
+			_coaches = new Dictionary<string, Coach>();
 			_players = new List<Player>();	
 		}
 
 		public bool Add(Coach coach)
 		{
 			bool success = false;
-			_coaches.Add(coach);
+			_coaches.Add(coach.FullName, coach);
+			coach.Team = this;
 			success = true;
 
 			return success;
 		}
+
+		public bool Remove(Coach coach)
+        {
+			bool success = _coaches.Remove(coach.FullName);
+            if (success)
+            {
+				coach.Team = null;
+            }
+			return success;
+        }
 
 		public bool Add(Player player)
 		{
 			bool success = false;
 			_players.Add(player);
+			player.Team = this;
 			success = true;
 
 			return success;
 		}
+
+		public bool Remove(Player player)
+        {
+			bool success = false;
+			_players.Remove(player);
+			player.Team = null;
+			success = true;
+			return success;
+        }
 
 		override
 		public string ToString()
 		{
 			return "Team name: " + Name;
 		}
+
+		public Coach FindCoach(string firstName, string lastName)
+        {
+			Coach foundCoach = null;
+			_coaches.TryGetValue(firstName + " " + lastName, out foundCoach);
+			return foundCoach;
+        }
 	}
 }

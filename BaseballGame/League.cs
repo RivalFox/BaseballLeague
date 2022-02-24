@@ -8,9 +8,9 @@ namespace BaseballLeague
 	{
 		private string _name;
 		private List<Player> _players;
-		private List<Coach> _coaches;
+		private Dictionary<string, Coach> _coaches;
 		private List<Team> _teams;
-		public string Name { set { _name = value; } get { return _name; } }
+		public string Name { set; get;}
 		public League() : this ("NO NAME") { }
 
 		// Designated Constructor
@@ -18,7 +18,7 @@ namespace BaseballLeague
 		{
 			Name = name;
 			_players = new List<Player>();
-			_coaches = new List<Coach>();
+			_coaches = new Dictionary<string, Coach>();
 			_teams = new List<Team>();
 		}
 
@@ -80,9 +80,12 @@ namespace BaseballLeague
 		public bool CreateCoach(string lastName, string firstName)
 		{
 			bool success = false;
-			Coach coach = new Coach(lastName, firstName);
-			_coaches.Add(coach);
-			success = true;
+			if(FindCoach(firstName, lastName) == null)
+			{
+				Coach coach = new Coach(lastName, firstName);
+				_coaches[coach.FullName] = coach;
+				success = true;
+			}
 
 			return success;
 		}
@@ -92,7 +95,7 @@ namespace BaseballLeague
 			get
 			{
 				string list = "";
-				foreach(Coach coach in _coaches)
+				foreach(Coach coach in _coaches.Values)
 				{
 					list += coach + "\n";
 				}
@@ -106,21 +109,14 @@ namespace BaseballLeague
 			Console.WriteLine(ListOfAllCoaches);
 		}
 
-		public bool ChangeTitleToCoaches(string firstName, string lastName, string title)
+		public bool ChangeTitleToCoaches(string firstName, string lastName, string newtitle)
 		{
 			bool success = false;
-			Coach foundCoach = null;
-			foreach(Coach coach in _coaches)
-			{
-				if(coach.FirstName.Equals(firstName) && coach.LastName.Equals(lastName))
-				{
-					foundCoach = coach;
-				}
-			}
+			Coach foundCoach = FindCoach(firstName, lastName);
 			if(foundCoach != null)
 			{
-				string UpperCasePosition = title.ToUpper();
-				//
+				string UpperCasePosition = newtitle.ToUpper();
+				//Enum.TryParse()
 				TITLE desiredTitle;
 				if(Enum.TryParse(UpperCasePosition, out desiredTitle))
 				{
@@ -164,24 +160,10 @@ namespace BaseballLeague
 		public bool AddCoachToTeam(string firstName, string lastName, string teamName)
 		{
 			bool success = false;
-			Coach foundCoach = null;
-			foreach (Coach coach in _coaches)
-			{
-				if (coach.FirstName.Equals(firstName) && coach.LastName.Equals(lastName))
-				{
-					foundCoach = coach;
-				}
-			}
+			Coach foundCoach = FindCoach(firstName, lastName);
 			if (foundCoach != null)
 			{
-				Team foundTeam = null;
-				foreach(Team team in _teams)
-				{
-					if (team.Name.Equals(teamName))
-					{
-						foundTeam = team;
-					}
-				}
+				Team foundTeam = FindTeam(teamName);
 				if(foundTeam != null)
 				{
 					foundTeam.Add(foundCoach);
@@ -195,24 +177,10 @@ namespace BaseballLeague
 		public bool AddPlayerToTeam(string firstName, string lastName, string teamName)
 		{
 			bool success = false;
-			Player foundPlayer = null;
-			foreach (Player player in _players)
-			{
-				if (player.FirstName.Equals(firstName) && player.LastName.Equals(lastName))
-				{
-					foundPlayer = player;
-				}
-			}
+			Player foundPlayer = FindPlayer(firstName, lastName);
 			if (foundPlayer != null)
 			{
-				Team foundTeam = null;
-				foreach (Team team in _teams)
-				{
-					if (team.Name.Equals(teamName))
-					{
-						foundTeam = team;
-					}
-				}
+				Team foundTeam = FindTeam(teamName);
 				if (foundTeam != null)
 				{
 					foundTeam.Add(foundPlayer);
@@ -224,22 +192,24 @@ namespace BaseballLeague
 		}
 
 		public void DisplayTeamRoster(string teamName)
-        {
+		{
 			Team foundTeam = FindTeam(teamName);
 			if(foundTeam != null)
-            {
+			{
 				Console.WriteLine("The roster of team " + teamName + " is:");
 				Console.WriteLine(foundTeam.TeamRoster);
-            }
-            else
-            {
+			}
+			else
+			{
 				Console.WriteLine("The team " + teamName + " was not found.");
-            }
+			}
 		}
 
 		public Coach FindCoach(string firstName, string lastName)
 		{
 			Coach foundCoach = null;
+			_coaches.TryGetValue(firstName + " " + lastName, out foundCoach);
+			/*
 			foreach (Coach coach in _coaches)
 			{
 				if (coach.FirstName.Equals(firstName) && coach.LastName.Equals(lastName))
@@ -247,34 +217,35 @@ namespace BaseballLeague
 					foundCoach = coach;
 				}
 			}
+			*/
 			return foundCoach;
 		}
 
 		public Player FindPlayer(string firstName, string lastName)
-        {
+		{
 			Player foundPlayer = null;
 			foreach(Player player in _players)
-            {
+			{
 				if(player.FirstName.Equals(firstName) && player.LastName.Equals(lastName))
-                {
+				{
 					foundPlayer = player;
-                }
-            }
+				}
+			}
 			return foundPlayer;
-        }
+		}
 
 		public Team FindTeam(string teamName)
-        {
+		{
 			Team foundTeam = null;
 			foreach(Team team in _teams)
-            {
-                if (team.Name.Equals(teamName))
-                {
+			{
+				if (team.Name.Equals(teamName))
+				{
 					foundTeam = team;
-                }
-            }
+				}
+			}
 			return foundTeam;
-        }
+		}
 
 	}
 }

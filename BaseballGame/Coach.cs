@@ -11,6 +11,24 @@ namespace BaseballLeague
 		private string _firstname;
 		private string _lastname;
 		private TITLE _title;
+		private Team _team;
+		public Team Team
+        {
+            set
+            {
+				if(_team != null)
+                {
+					Team tempTeam = _team;
+					_team = null;
+					tempTeam.Remove(this);
+                }
+				_team = value;
+            }
+            get
+            {
+				return _team;
+            }
+        }
 
 		//
 		public string FirstName
@@ -47,6 +65,7 @@ namespace BaseballLeague
 			_firstname = firstName;
 			_lastname = lastName;
 			Title = title;
+			Team = null;
 		}
 
 		override
