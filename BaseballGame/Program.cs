@@ -101,6 +101,7 @@ namespace BaseballLeague
 						{
 							string inputFirstName = "";
 							string inputLastName = "";
+							Command command;
 							Console.WriteLine("\nEnter your choice:");
 							Console.WriteLine("1. Create Coach");
 							Console.WriteLine("2. List All coaches");
@@ -115,7 +116,11 @@ namespace BaseballLeague
 									inputFirstName = Console.ReadLine();
 									Console.WriteLine("Please, enter the last name:\n");
 									inputLastName = Console.ReadLine();
-									bool coachCreated = league.CreateCoach(inputLastName, inputFirstName);
+									command = new CreateCoachCommand();
+									command.Param0 = inputFirstName;
+									command.Param1 = inputLastName;
+									//bool coachCreated = league.CreateCoach(inputLastName, inputFirstName);
+									bool coachCreated = command.Execute(league);
 									if (coachCreated)
 									{
 										Console.WriteLine("The coach's " + inputFirstName + " " + inputLastName + " was successfully created.");
@@ -127,7 +132,8 @@ namespace BaseballLeague
 									break;
 								case "2":
 									Console.WriteLine("Let's list all coaches");
-									league.DisplayListOfAllCoaches();
+									command = new DisplayAllCoachesCommand();
+									command.Execute(league);
 									break;
 								case "3":
 									Console.WriteLine("\nLet's change a title to a coach.\n");
@@ -137,7 +143,12 @@ namespace BaseballLeague
 									string coachLastName = Console.ReadLine();
 									Console.WriteLine("Please, enter position (MAIN, ASSISTANT):\n");
 									string inputTitle = Console.ReadLine();
-									bool changeTitle = league.ChangeTitleToCoaches(coachFirstName, coachLastName, inputTitle);
+									command = new ChangeCoachTitleCommand();
+									command.Param0 = coachFirstName;
+									command.Param1 = coachLastName;
+									command.Param2 = inputTitle;
+									// bool changeTitle = league.ChangeTitleToCoaches(coachFirstName, coachLastName, inputTitle);
+									bool changeTitle = command.Execute(league);
 									if (changeTitle)
 									{
 										Console.WriteLine("The coach's " + coachFirstName + " " + coachLastName + " is at position " + inputTitle);
@@ -165,6 +176,7 @@ namespace BaseballLeague
 							string inputTeamName = "";
 							string inputFirstName = "";
 							string inputLastName = "";
+							Command command;
 							Console.WriteLine("\nEnter your choice:");
 							Console.WriteLine("1. Create Team");
 							Console.WriteLine("2. List All teams");
@@ -178,7 +190,11 @@ namespace BaseballLeague
 								case "1":
 									Console.WriteLine("\nLet's create a Team\n");
 									Console.WriteLine("Please, enter the team name:\n");
-									bool teamCreated = league.CreateTeam(inputTeamName);
+									inputTeamName = Console.ReadLine();
+									command = new CreateTeamCommand();
+									command.Param0 = inputTeamName;
+									//bool teamCreated = league.CreateTeam(inputTeamName);
+									bool teamCreated = command.Execute(league);
 									if (teamCreated)
 									{
 										Console.WriteLine("Team successfully created.");
@@ -190,7 +206,8 @@ namespace BaseballLeague
 									break;
 								case "2":
 									Console.WriteLine("Let's list all teams");
-									league.DisplayListOfAllTeams();
+									command = new DisplayAllTeamsCommand();
+									command.Execute(league);
 									break;
 								case "3":
 									Console.WriteLine("Let's add a coach to a team.\n");
@@ -200,7 +217,12 @@ namespace BaseballLeague
 									inputLastName = Console.ReadLine();
 									Console.WriteLine("Enter the team's name\n");
 									inputTeamName = Console.ReadLine();
-									if(league.AddCoachToTeam(inputFirstName, inputLastName, inputTeamName))
+									command = new AddCoachToTeamCommand();
+									command.Param0 = inputFirstName;
+									command.Param1 = inputLastName;
+									command.Param2 = inputTeamName;
+									bool addedCoachToTeam = command.Execute(league);
+									if(addedCoachToTeam)
 									{
 										Console.WriteLine("Coach successfully added to the team.");
 									}
@@ -217,7 +239,12 @@ namespace BaseballLeague
 									inputLastName = Console.ReadLine();
 									Console.WriteLine("Enter the team's name\n");
 									inputTeamName = Console.ReadLine();
-									if(league.AddPlayerToTeam(inputFirstName, inputLastName, inputTeamName))
+									command = new AddPlayerToTeamCommand();
+									command.Param0 = inputFirstName;
+									command.Param1 = inputLastName;
+									command.Param2 = inputTeamName;
+									bool addedPlayerToTeam = command.Execute(league);
+									if(addedPlayerToTeam)
                                     {
 										Console.WriteLine("Player successfully added to the team.");
                                     }
