@@ -127,9 +127,12 @@ namespace BaseballLeague
 		public bool CreateTeam(string name)
 		{
 			bool success = false;
-			Team team = new Team(name);
-			_teams.Add(team);
-			success = true;
+			if(FindTeam(name) == null)
+            {
+				Team team = new Team(name);
+				_teams[team.Name] = team;
+				success = true;
+            }
 
 			return success;
 		}
@@ -139,7 +142,7 @@ namespace BaseballLeague
 			get
 			{
 				string list = "";
-				foreach(Team team in _teams)
+				foreach(Team team in _teams.Values)
 				{
 					list += team + "\n";
 				}
@@ -205,35 +208,20 @@ namespace BaseballLeague
 		{
 			Coach foundCoach = null;
 			_coaches.TryGetValue(firstName + " " + lastName, out foundCoach);
-			/*
-			foreach (Coach coach in _coaches)
-			{
-				if (coach.FirstName.Equals(firstName) && coach.LastName.Equals(lastName))
-				{
-					foundCoach = coach;
-				}
-			}
-			*/
 			return foundCoach;
 		}
 
 		public Player FindPlayer(string firstName, string lastName)
 		{
 			Player foundPlayer = null;
-			foreach(Player player in _players)
-			{
-				if(player.FirstName.Equals(firstName) && player.LastName.Equals(lastName))
-				{
-					foundPlayer = player;
-				}
-			}
+			_players.TryGetValue(firstName + " " + lastName, out foundPlayer);
 			return foundPlayer;
 		}
 
 		public Team FindTeam(string teamName)
 		{
 			Team foundTeam = null;
-			foreach(Team team in _teams)
+			foreach(Team team in _teams.Values)
 			{
 				if (team.Name.Equals(teamName))
 				{

@@ -9,7 +9,7 @@ namespace BaseballLeague
 		private string _name;
 		public string Name { set { _name = value; } get { return _name; } }
 		private Dictionary<string, Coach> _coaches;
-		private List<Player> _players;
+		private Dictionary<string, Player> _players;
 		public string TeamRoster
         {
             get
@@ -43,7 +43,7 @@ namespace BaseballLeague
 			get
 			{
 				string list = "";
-				foreach (Player player in _players)
+				foreach (Player player in _players.Values)
 				{
 					list += player + "\n";
 				}
@@ -58,7 +58,7 @@ namespace BaseballLeague
 		{
 			Name = name;
 			_coaches = new Dictionary<string, Coach>();
-			_players = new List<Player>();	
+			_players = new Dictionary<string, Player>();	
 		}
 
 		public bool Add(Coach coach)
@@ -84,7 +84,7 @@ namespace BaseballLeague
 		public bool Add(Player player)
 		{
 			bool success = false;
-			_players.Add(player);
+			_players.Add(player.FullName, player);
 			player.Team = this;
 			success = true;
 
@@ -94,9 +94,10 @@ namespace BaseballLeague
 		public bool Remove(Player player)
         {
 			bool success = false;
-			_players.Remove(player);
-			player.Team = null;
-			success = true;
+            if (success)
+            {
+				player.Team = null;
+            }
 			return success;
         }
 
@@ -112,5 +113,12 @@ namespace BaseballLeague
 			_coaches.TryGetValue(firstName + " " + lastName, out foundCoach);
 			return foundCoach;
         }
+
+		public Player FindPlayer(string firstName, string lastName)
+		{
+			Player foundPlayer = null;
+			_players.TryGetValue(firstName + " " + lastName, out foundPlayer);
+			return foundPlayer;
+		}
 	}
 }
