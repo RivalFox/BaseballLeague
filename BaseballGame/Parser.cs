@@ -7,7 +7,7 @@ namespace BaseballLeague
     public class Parser
     {
         private Dictionary<string, Command> _commands;
-        private static Command[] defaultCommand =
+        private static Command[] defaultCommands =
         {
             new CreatePlayerCommand(),
             new DisplayAllPlayersCommand(),
