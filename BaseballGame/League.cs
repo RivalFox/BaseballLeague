@@ -231,5 +231,23 @@ namespace BaseballLeague
 			return foundTeam;
 		}
 
+		public void BuildTestDatabase()
+        {
+			string[] textCommands =
+			{
+				"CreatePlayer Rodrigo Obando",
+				"CreatePlayer Shamim Khan",
+				"CreatePlayer Rania Hodhod"
+			};
+			Parser parser = new Parser();
+			foreach(string textCommand in textCommands)
+            {
+				Command command = parser.parse(textCommand);
+				if(command != null)
+                {
+					command.Execute(this);
+                }
+            }
+        }
 	}
 }
