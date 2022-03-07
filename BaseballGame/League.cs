@@ -237,6 +237,22 @@ namespace BaseballLeague
 			return success;
 		}
 
+		public bool RemoveCoachFromTeam(string firstName, string lastName, string teamName)
+        {
+			bool success = false;
+			Coach foundCoach = FindCoach(firstName, lastName);
+			if(foundCoach != null)
+            {
+				Team foundTeam = FindTeam(teamName);
+				if(foundTeam != null)
+                {
+					foundTeam.Remove(foundCoach);
+					success = true;
+                }
+            }
+			return success;
+        }
+
 		public bool AddPlayerToTeam(string firstName, string lastName, string teamName)
 		{
 			bool success = false;
@@ -251,6 +267,22 @@ namespace BaseballLeague
 				}
 			}
 
+			return success;
+		}
+
+		public bool RemovePlayerFromTeam(string firstName, string lastName, string teamName)
+        {
+			bool success = false;
+			Player foundPlayer = FindPlayer(firstName, lastName);
+			if (foundPlayer != null)
+			{
+				Team foundTeam = FindTeam(teamName);
+				if (foundTeam != null)
+				{
+					foundTeam.Remove(foundPlayer);
+					success = true;
+				}
+			}
 			return success;
 		}
 

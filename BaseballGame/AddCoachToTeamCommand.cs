@@ -30,7 +30,10 @@ namespace BaseballLeague
         public bool Undo(League league)
         {
             bool success = false;
-
+            if(Param0 != null && Param1 != null && Param2 != null)
+            {
+                success = league.RemoveCoachFromTeam(Param0, Param1, Param2);
+            }
             return success;
         }
     }
