@@ -30,7 +30,14 @@ namespace BaseballLeague
         public bool Undo(League league)
         {
             bool success = false;
-
+            if(Param0 != null && Param1 != null)
+            {
+                success = league.DeleteCoach(Param0, Param1);
+            }
+            else
+            {
+                Console.WriteLine("There was an error executing the undo of the Create Player command.");
+            }
             return success;
         }
     }

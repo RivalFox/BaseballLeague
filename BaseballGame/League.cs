@@ -99,6 +99,19 @@ namespace BaseballLeague
 			return success;
 		}
 
+		public bool DeleteCoach(string firstName, string lastName)
+        {
+			bool success = false;
+			Coach coach = FindCoach(firstName, lastName);
+			if(coach != null)
+            {
+				_coaches.Remove(firstName + " " + lastName);
+				coach.Team = null;
+				success = true;
+            }
+			return success;
+        }
+
 		public string ListOfAllCoaches
 		{
 			get
