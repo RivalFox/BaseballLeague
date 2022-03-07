@@ -67,8 +67,6 @@ namespace BaseballLeague
 			Console.WriteLine(ListOfAllPlayers);
 		}
 
-		
-
 		public bool ChangePositionToPlayer(string firstName, string lastName, string position)
 		{
 			bool success = false;
@@ -87,6 +85,18 @@ namespace BaseballLeague
 
 			return success;
 		}
+
+		public bool ChangePlayerToDefaultPostion(string firstName, string lastName)
+        {
+			bool success = false;
+			Player foundPlayer = FindPlayer(firstName, lastName);
+			if(foundPlayer != null)
+            {
+				foundPlayer.Position = POSITION.FIRST_BASE;
+				success = true;
+            }
+			return success;
+        }
 
 		public bool CreateCoach(string lastName, string firstName)
 		{
@@ -151,6 +161,19 @@ namespace BaseballLeague
 
 			return success;
 		}
+
+		public bool ChangeCoachTitleToDefault(string firstName, string lastName)
+        {
+			bool success = false;
+			Coach foundCoach = FindCoach(firstName, lastName);
+			if(foundCoach != null)
+            {
+				foundCoach.Title = TITLE.ASSISTANT;
+				success = true;
+            }
+
+			return success;
+        }
 
 		public bool CreateTeam(string name)
 		{

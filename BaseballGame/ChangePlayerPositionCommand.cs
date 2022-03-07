@@ -31,7 +31,10 @@ namespace BaseballLeague
         public bool Undo(League league)
         {
             bool success = false;
-
+            if(Param0 != null && Param1 != null)
+            {
+                success = league.ChangePlayerToDefaultPostion(Param0, Param1);
+            }
             return success;
         }
     }
