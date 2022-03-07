@@ -67,6 +67,8 @@ namespace BaseballLeague
 			Console.WriteLine(ListOfAllPlayers);
 		}
 
+		
+
 		public bool ChangePositionToPlayer(string firstName, string lastName, string position)
 		{
 			bool success = false;
@@ -162,6 +164,19 @@ namespace BaseballLeague
 
 			return success;
 		}
+
+		public bool DeleteTeam(string name)
+        {
+			bool success = false;
+			Team team = FindTeam(name);
+			if(team != null)
+            {
+				_teams.Remove(name);
+				success = true;
+            }
+
+			return success;
+        }
 
 		public string ListOfAllTeams
 		{

@@ -36,7 +36,7 @@ namespace BaseballLeague
             }
             else
             {
-                Console.WriteLine("There was an error executing the undo of the Create Player command.");
+                Console.WriteLine("There was an error executing the undo of the Create Coach command.");
             }
             return success;
         }
