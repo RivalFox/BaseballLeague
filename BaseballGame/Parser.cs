@@ -42,7 +42,7 @@ namespace BaseballLeague
             _commands.TryGetValue(words[0], out command);
             if(command != null)
             {
-                Command newCommand = command;
+                command = command.Clone;
 
                 command.Param0 = null;
                 command.Param1 = null;

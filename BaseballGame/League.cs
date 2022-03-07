@@ -35,6 +35,19 @@ namespace BaseballLeague
 			return success;
 		}
 
+		public bool DeletePlayer(string firstName, string lastName)
+        {
+			bool success = false;
+			Player player = FindPlayer(firstName, lastName);
+			if(player != null)
+            {
+				_players.Remove(firstName + " " + lastName);
+				player.Team = null;
+				success = true;
+            }
+			return success;
+        }
+
 		public string ListOfAllPlayers
 		{
 			get

@@ -6,6 +6,9 @@ namespace BaseballLeague
 {
     public class DisplayAllTeamsCommand : Command
     {
+        override
+        public bool Undoable
+        { get { return false; } }
         public DisplayAllTeamsCommand() : base("DisplayAllTeams") { }
 
         override
@@ -13,6 +16,14 @@ namespace BaseballLeague
         {
             bool success = true;
             league.DisplayListOfAllTeams();
+
+            return success;
+        }
+
+        override
+        public bool Undo(League league)
+        {
+            bool success = false;
 
             return success;
         }

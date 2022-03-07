@@ -6,6 +6,9 @@ namespace BaseballLeague
 {
     public class ChangeCoachTitleCommand : Command
     {
+        override
+        public bool Undoable
+        { get { return true; } }
         public ChangeCoachTitleCommand() : base("ChangeCoachTitle") { }
 
         override
@@ -23,5 +26,14 @@ namespace BaseballLeague
 
             return success;
         }
+
+        override
+        public bool Undo(League league)
+        {
+            bool success = false;
+
+            return success;
+        }
+
     }
 }

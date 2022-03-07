@@ -9,36 +9,57 @@ namespace BaseballLeague
 		static void Main(string[] args)
         {
 			League league = new League("OOD League");
-
 			bool finished = false;
 			Parser parser = new Parser();
-			List<Command> log = new List<Command>();
+			Stack<Command> commandStack = new Stack<Command>();
+			List<string> log = new List<String>();
 			Console.WriteLine("Welcome to our League Management System.\n");
             while (!finished)
             {
 				Console.WriteLine("\nPlease, enter a command:\n");
 				string commandString = Console.ReadLine();
-				Console.WriteLine("You enter the command -> " + commandString);
-				if (commandString.Equals("exit"))
+                //Console.WriteLine("You enter the command -> " + commandString);
+                switch (commandString)
                 {
-					finished = true;
-                }
-                if (commandString.Equals("log"))
-                {
-					foreach(Command loggedCommand in log)
-                    {
-						Console.WriteLine(loggedCommand);
-                    }
-                }
-				Command command = parser.parse(commandString);
-				if(command != null)
-                {
-					command.Execute(league);
-					log.Add(command);
-                }
-                else
-                {
-					Console.WriteLine("I do not recognize that command.");
+					case "exit":
+						finished = true;
+						break;
+					case "log":
+						foreach(string loggedCommand in log)
+                        {
+							Console.WriteLine(loggedCommand);
+                        }
+						break;
+					case "undo":
+						Command poppedCommand = null;
+						commandStack.TryPop(out poppedCommand);
+						if(poppedCommand != null)
+                        {
+							poppedCommand.Undo(league);
+							Console.WriteLine("\nUndoing the command " + poppedCommand + "\n");
+                        }
+                        else
+                        {
+							Console.WriteLine("\nThere is no command to undo.\n");
+                        }
+						log.Add(commandString);
+						break;
+					default:
+						Command command = parser.parse(commandString);
+						if(command != null)
+                        {
+							command.Execute(league);
+                            if (command.Undoable)
+                            {
+								commandStack.Push(command);
+                            }
+							log.Add(command.ToString());
+                        }
+                        else
+                        {
+							Console.WriteLine("\nI do not recognize that command.\n");
+                        }
+						break;
                 }
             }
 			Console.WriteLine("Thank you for using League Management System (LMS)");

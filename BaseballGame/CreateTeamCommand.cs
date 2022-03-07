@@ -6,6 +6,9 @@ namespace BaseballLeague
 {
     public class CreateTeamCommand : Command
     {
+        override
+        public bool Undoable
+        { get { return true; } }
         public CreateTeamCommand() : base("CreateTeam") { }
 
         override
@@ -20,6 +23,14 @@ namespace BaseballLeague
             {
                 Console.WriteLine("There was an error executing Create Team Command");
             }
+            return success;
+        }
+
+        override
+        public bool Undo(League league)
+        {
+            bool success = false;
+
             return success;
         }
     }

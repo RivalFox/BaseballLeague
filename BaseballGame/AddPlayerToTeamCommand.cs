@@ -6,6 +6,9 @@ namespace BaseballLeague
 {
     public class AddPlayerToTeamCommand : Command
     {
+        override
+        public bool Undoable
+        { get { return true; } }
         public AddPlayerToTeamCommand() : base("AddPlayerToTeam") { }
 
         override
@@ -20,6 +23,14 @@ namespace BaseballLeague
             {
                 Console.WriteLine("There is input missing to add a Player to a Team");
             }
+            return success;
+        }
+
+        override
+        public bool Undo(League league)
+        {
+            bool success = false;
+
             return success;
         }
     }

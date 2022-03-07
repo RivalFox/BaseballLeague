@@ -6,6 +6,9 @@ namespace BaseballLeague
 {
     public class ChangePlayerPositionCommand : Command
     {
+        override
+        public bool Undoable
+        { get { return true; } }
         public ChangePlayerPositionCommand() : base("ChangePlayerPosition") { }
 
         override
@@ -20,6 +23,14 @@ namespace BaseballLeague
             {
                 Console.WriteLine("There is input missing to change the position of a player");
             }
+
+            return success;
+        }
+
+        override
+        public bool Undo(League league)
+        {
+            bool success = false;
 
             return success;
         }

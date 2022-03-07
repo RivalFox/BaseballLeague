@@ -4,8 +4,11 @@ using System.Text;
 
 namespace BaseballLeague
 {
-    public class DisplayAllPlayersCommand : Command
+    class DisplayAllPlayersCommand : Command
     {
+        override
+        public bool Undoable
+        { get { return false; } }
         public DisplayAllPlayersCommand() : base("DisplayAllPlayers") { }
 
         override
@@ -13,6 +16,14 @@ namespace BaseballLeague
         {
             bool success = true;
             league.DisplayListOfAllPlayers();
+
+            return success;
+        }
+
+        override
+        public bool Undo(League league)
+        {
+            bool success = false;
 
             return success;
         }
